@@ -6,6 +6,8 @@ import Layout from "../Layout";
 import Play from "./Routes/Play";
 import Compete from "./Routes/Compete";
 import AboutUs from "./Routes/AboutUs";
+import Register from "./Routes/Register";
+import Login from "./Routes/Login";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <AboutUs />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
       },
     ],
   },
