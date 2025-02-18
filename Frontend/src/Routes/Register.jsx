@@ -46,35 +46,7 @@ const Register = () => {
         <motion.form
           onSubmit={handleSubmit}
           className="bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 p-8 rounded-lg shadow-lg w-[90%] max-w-md text-white relative"
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.3 }}
         >
-          <motion.div
-            className="absolute -top-10 -right-10 w-20 h-20 rounded-full bg-yellow-500"
-            animate={{
-              rotate: [0, 360],
-              scale: [0.75, 1, 0.75],
-              opacity: [0.5, 1, 0.5],
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 4,
-              ease: "easeInOut",
-            }}
-          ></motion.div>
-          <motion.div
-            className="absolute -bottom-10 -left-10 w-20 h-20 rounded-full bg-yellow-500"
-            animate={{
-              rotate: [0, 360],
-              scale: [0.75, 1, 0.75],
-              opacity: [0.5, 1, 0.5],
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 4,
-              ease: "easeInOut",
-            }}
-          ></motion.div>
           <h1 className="text-yellow-500 text-4xl font-extrabold mb-6 text-center">
             Register
           </h1>
@@ -91,7 +63,7 @@ const Register = () => {
               name="name"
               value={formData.name}
               onChange={handleChange}
-              className="w-full px-4 py-2 text-gray-900 bg-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              className="w-full px-4 py-2 bg-transparent text-white border-b-2 border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded transition duration-200"
               required
             />
           </div>
@@ -108,7 +80,7 @@ const Register = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-4 py-2 text-gray-900 bg-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              className="w-full px-4 py-2 bg-transparent text-white border-b-2 border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded transition duration-200"
               required
             />
           </div>
@@ -125,11 +97,11 @@ const Register = () => {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className="w-full px-4 py-2 text-gray-900 bg-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              className="w-full px-4 py-2 bg-transparent text-white border-b-2 border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded transition duration-200"
               required
             />
             <span
-              className="absolute top-10 right-4 text-gray-900 cursor-pointer"
+              className="absolute top-10 right-4 text-gray-400 cursor-pointer"
               onClick={togglePasswordVisibility}
             >
               {showPassword ? "Hide" : "Show"}
@@ -148,7 +120,7 @@ const Register = () => {
               name="confirmPassword"
               value={formData.confirmPassword}
               onChange={handleChange}
-              className="w-full px-4 py-2 text-gray-900 bg-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              className="w-full px-4 py-2 bg-transparent text-white border-b-2 border-yellow-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 rounded transition duration-200"
               required
             />
           </div>
