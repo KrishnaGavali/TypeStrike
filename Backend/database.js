@@ -1,6 +1,9 @@
-import mongoose from 'mongoose';
+import dotenv from "dotenv";
+dotenv.config();
 
-const MONGO_URI = "mongodb://localhost:27017/typestrike_test";
+import mongoose from 'mongoose';
+console.log(process.env.MONGO_URI);
+const MONGO_URI = process.env.MONGO_URI;
 
 // Global connection variable
 let isConnected = false;
@@ -12,7 +15,9 @@ export async function connectToDatabase() {
     }
 
     try {
-        await mongoose.connect(MONGO_URI);
+        await mongoose.connect(MONGO_URI,
+            { dbName: "typeStrikeDB" }
+        );
         isConnected = true;
         console.log('Connected to MongoDB with Mongoose');
         return mongoose.connection;
