@@ -1,13 +1,27 @@
 import { motion } from "motion/react";
-import { useState } from "react";
-import { Link } from "react-router";
+import AuthContext from "../context/AuthContext/AuthContext";
+import { useState, useEffect, useContext } from "react";
+import { Link, useNavigate } from "react-router";
 import "../App.css";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const { setIsAuth, setUser } = useContext(AuthContext);
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const [message, setMessage] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setMessage("");
+      setSuccess(false);
+    }, 2000);
+  }, [message, success]);
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -18,9 +32,67 @@ const Login = () => {
     });
   };
 
+  const checkforempty = (data) => {
+    for (const key in data) {
+      if (data[key] === "") {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const validateEmail = (email) => {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Welcome back, ${formData.email}!`);
+
+    if (checkforempty(formData)) {
+      setMessage("Fill all the fields 🪹");
+      setSuccess(false);
+      return;
+    }
+
+    if (!validateEmail(formData.email)) {
+      setMessage("Enter a valid email ❌");
+      setSuccess(false);
+      return;
+    }
+
+    const localIpAdd = import.meta.env.VITE_LOCAL_IP_ADDRESS;
+    console.log(localIpAdd);
+
+    fetch(`http://${localIpAdd}:3000/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setMessage(data.message);
+          setSuccess(true);
+          setIsAuth(true);
+          const userFirstName = data.user.name.split(" ")[0];
+          console.log(data.user.userId);
+
+          setUser({
+            name: userFirstName,
+            email: data.user.email,
+            userId: data.user.userId,
+          });
+          setTimeout(() => {
+            navigate("/");
+          }, 1000);
+        } else {
+          setMessage(data.message);
+          setSuccess(false);
+        }
+      });
   };
 
   const togglePasswordVisibility = () => {
@@ -96,8 +168,15 @@ const Login = () => {
         >
           Login
         </motion.button>
+        <p
+          className={`text-center mt-2 ${
+            success ? "text-green-500" : "text-red-500"
+          }`}
+        >
+          {message}
+        </p>
 
-        <p className="text-center mt-4 text-gray-400">
+        <p className="text-center mt-2 text-gray-400">
           Don&apos;t have an account?{" "}
           <Link
             to="/register"

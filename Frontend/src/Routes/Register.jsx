@@ -1,8 +1,13 @@
 import { motion } from "motion/react";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router"; // Ensure you have react-router-dom installed and configured
+import { useNavigate } from "react-router";
+import AuthContext from "../context/AuthContext/AuthContext";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const { setIsAuth, setUser } = useContext(AuthContext);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -11,6 +16,15 @@ const Register = () => {
   });
 
   const [showPassword, setShowPassword] = useState(false);
+  const [message, setMessage] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setMessage("");
+      setSuccess(false);
+    }, 2000);
+  }, [message, success]);
 
   const handleChange = (e) => {
     setFormData({
@@ -19,13 +33,73 @@ const Register = () => {
     });
   };
 
+  const checkforempty = (data) => {
+    for (const key in data) {
+      if (data[key] === "") {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const validateEmail = (email) => {
+    const re = /\S+@\S+\.\S+/;
+    return re.test(email);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
+      setMessage("Password Does not Match 🟰");
+      setSuccess(false);
     } else {
-      alert("Registration successful!");
-      // Logic to handle registration submission goes here
+      if (checkforempty(formData)) {
+        setMessage("Fill all the fields 🪹");
+        setSuccess(false);
+        return;
+      }
+
+      if (!validateEmail(formData.email)) {
+        setMessage("Enter a valid email ❌");
+        setSuccess(false);
+        return;
+      }
+
+      const localIpAdd = import.meta.env.VITE_LOCAL_IP_ADDRESS;
+
+      fetch(`http://${localIpAdd}:3000/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.success) {
+            setMessage("Registration Successfull ✅");
+            setSuccess(true);
+            setTimeout(() => {
+              navigate("/");
+            }, 500);
+            setIsAuth(true);
+            const userFirstName = data.user.name.split(" ")[0];
+            setUser({
+              name: userFirstName,
+              email: data.user.email,
+              userId: data.user.userId,
+            });
+          } else {
+            console.log(data);
+
+            setMessage(data.message);
+            setSuccess(false);
+          }
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          alert("An error occurred during registration." + error);
+        });
     }
   };
 
@@ -131,7 +205,15 @@ const Register = () => {
           >
             Register
           </motion.button>
-          <p className="text-center mt-4 text-gray-400">
+          <p
+            className={`text-center m-2 ${
+              success ? "text-green-500" : "text-red-500"
+            }`}
+            id="message"
+          >
+            {message}
+          </p>
+          <p className="text-center text-gray-400">
             Have an account?{" "}
             <Link
               to="/login"

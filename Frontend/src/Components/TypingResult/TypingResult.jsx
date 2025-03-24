@@ -2,8 +2,6 @@ import PropTypes from "prop-types"; // Import PropTypes
 import ResultChart from "./ResultChart";
 
 const TypingResult = ({ Stats }) => {
-  console.log(Stats);
-  console.log("Fuck");
   return (
     <>
       <div
