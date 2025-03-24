@@ -1,0 +1,5 @@
+{
+  "editor.overtypeCursorStyle": "line",
+  "terminal.integrated.cursorStyle": "line",
+  "postman.settings.dotenv-detection-notification-visibility": false
+}
