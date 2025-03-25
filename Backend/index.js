@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import cors from "cors";
 import { createServer } from "http";
@@ -6,8 +9,9 @@ import authRouter from "./Routes/auth.routes.js";
 import typingRouter from "./Routes/typing.routes.js";
 import os from 'os';
 
+
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 5000;
 const server = createServer(app);
 const io = new Server(server, {
     cors: {
@@ -25,7 +29,7 @@ app.use("/auth", authRouter);
 app.use("/typing", typingRouter);
 
 app.get("/", (req, res) => {
-    res.send("Hello World!");
+    res.send("Backend is UP AND RUNNING😊👋😅😂❤️‍🔥🔥");
 });
 
 const rooms = {};
@@ -199,12 +203,9 @@ const getLocalExternalIp = () => {
     return 'localhost';
 };
 
-const localExternalIp = getLocalExternalIp();
 
-// server.listen(port, localExternalIp, () => {
-//     console.log(`Server is running on http://${localExternalIp}:${port}`);
-// });
 
-server.listen(port, () => {
-    console.log(`Server is listening on http://localhost:${port}`);
-})
+server.listen(port, "0.0.0.0", () => {
+    console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on http://${getLocalExternalIp()}:${port}`);
+});
