@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { motion } from "motion/react";
-import AuthContext from "../Context/AuthContext/AuthContext";
+import AuthContext from "../context/AuthContext/AuthContext.js";
 import TypingHistory from "../Components/TypingHistory/TypingHistory";
 import Friends from "../Components/Friends/Friends.jsx";
 

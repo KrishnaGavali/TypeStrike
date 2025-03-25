@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { motion } from "motion/react"; // Corrected import
 import "./TypingHistory.css";
-import AuthContext from "../../Context/AuthContext/AuthContext";
+import AuthContext from "../../context/AuthContext/AuthContext";
 
 const TypingHistory = () => {
   const [typingHistory, setTypingHistory] = useState([]);
