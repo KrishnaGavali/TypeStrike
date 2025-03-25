@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { motion } from "motion/react";
 import FriendsAPI from "./Friends";
-import AuthContext from "../../Context/AuthContext/AuthContext";
+import AuthContext from "../../context/AuthContext/AuthContext";
 import "./Friends.css";
 
 const Friends = () => {
