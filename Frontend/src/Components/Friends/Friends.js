@@ -2,9 +2,10 @@
 const searchFriends = async (FriendUserId) => {
     try {
 
-        const localIpAdd = import.meta.env.VITE_LOCAL_IP_ADDRESS;
+        const backendURL = import.meta.env.VITE_BACKEND_URL;
 
-        const response = await fetch(`http://${localIpAdd}:3000/auth/profilebyId`, {
+
+        const response = await fetch(`${backendURL}/auth/profilebyId`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -26,8 +27,8 @@ const searchFriends = async (FriendUserId) => {
 // Function to add a new friend
 const addFriend = async (email, friendEmail) => {
     try {
-        const localIpAdd = import.meta.env.VITE_LOCAL_IP_ADDRESS;
-        const response = await fetch(`http://${localIpAdd}:3000/auth/addFriend`, {
+        const backendURL = import.meta.env.VITE_BACKEND_URL;
+        const response = await fetch(`${backendURL}/auth/addFriend`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -47,8 +48,8 @@ const addFriend = async (email, friendEmail) => {
 
 const getFriends = async (email) => {
     try {
-        const localIpAdd = import.meta.env.VITE_LOCAL_IP_ADDRESS;
-        const response = await fetch(`http://${localIpAdd}:3000/auth/getFriends`, {
+        const backendURL = import.meta.env.VITE_BACKEND_URL;
+        const response = await fetch(`${backendURL}/auth/getFriends`, {
             method: 'GET',
             headers: {
                 'email': email,

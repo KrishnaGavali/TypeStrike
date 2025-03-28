@@ -63,8 +63,9 @@ const Login = () => {
 
     const localIpAdd = import.meta.env.VITE_LOCAL_IP_ADDRESS;
     console.log(localIpAdd);
+    const backendURL = import.meta.env.VITE_BACKEND_URL;
 
-    fetch(`http://${localIpAdd}:3000/auth/login`, {
+    fetch(`${backendURL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

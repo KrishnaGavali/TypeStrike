@@ -11,17 +11,14 @@ const TypingHistory = () => {
   useEffect(() => {
     const fetchTypingHistory = async () => {
       try {
-        const localIpAdd = import.meta.env.VITE_LOCAL_IP_ADDRESS;
-        const response = await fetch(
-          `http://${localIpAdd}:3000/typing/history`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              userId: user.userId,
-            },
-          }
-        );
+        const backendURL = import.meta.env.VITE_BACKEND_URL;
+        const response = await fetch(`${backendURL}/typing/history`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            userId: user.userId,
+          },
+        });
         const data = await response.json();
 
         if (data.success) {

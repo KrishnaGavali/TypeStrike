@@ -5,9 +5,10 @@ import AuthContext from "../context/AuthContext/AuthContext";
 import "tailwindcss/tailwind.css"; // Ensure Tailwind is loaded
 import { useNavigate } from "react-router";
 
-const localIpAdd = import.meta.env.VITE_LOCAL_IP_ADDRESS;
+const backendURL = import.meta.env.VITE_BACKEND_URL;
+console.log(backendURL);
 
-const socket = io(`http://${localIpAdd}:3000`); // Match backend port
+const socket = io(backendURL); // Match backend port
 
 const Compete = () => {
   const navigate = useNavigate();

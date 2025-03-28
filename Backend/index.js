@@ -205,7 +205,7 @@ const getLocalExternalIp = () => {
 
 
 
-server.listen(port, "0.0.0.0", () => {
+server.listen(port, "127.0.0.1", () => {
     console.log(`Server is running on port ${port}`);
-    console.log(`Server is running on http://${getLocalExternalIp()}:${port}`);
+    console.log(`Server is running on http://127.0.0.1:${port}`);
 });

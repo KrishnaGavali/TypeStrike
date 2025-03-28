@@ -34,9 +34,9 @@ const RoomLobby = () => {
 
   // Establish socket connection
   useEffect(() => {
-    const localIpAdd = import.meta.env.VITE_LOCAL_IP_ADDRESS;
+    const backendURL = import.meta.env.VITE_BACKEND_URL;
 
-    const socket = io(`http://${localIpAdd}:3000`);
+    const socket = io(backendURL);
     socketRef.current = socket;
 
     return () => {

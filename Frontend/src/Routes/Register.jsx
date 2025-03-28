@@ -65,9 +65,9 @@ const Register = () => {
         return;
       }
 
-      const localIpAdd = import.meta.env.VITE_LOCAL_IP_ADDRESS;
+      const backendURL = import.meta.env.VITE_BACKEND_URL;
 
-      fetch(`http://${localIpAdd}:3000/auth/register`, {
+      fetch(`${backendURL}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
