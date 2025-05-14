@@ -1,6 +1,7 @@
 # ⌨️ **TypeStrike** – Real-Time Multiplayer Typing Mayhem
 
 [🌐 Play Now](https://typestrike.tech)
+
 🧠 Speed meets skill | 👥 Solo & Squad Modes | ☁️ Full-stack flex w/ sockets
 
 ---
@@ -67,6 +68,7 @@ Docs, setup guide, and some extra spice — dropping soon 🚀
 ---
 
 > *"TypeStrike isn't just a game—it's how coders assert dominance."*
+> 
 > – built by someone who’d rather race keys than solve trees
 
 ---
